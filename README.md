@@ -45,8 +45,7 @@ https://github.com/bluefox1688/vue-cli-multi-page/tree/master
  14. 获取多页面的url参数的方法
  15. 全局注册vue全局过滤器的方法
 
-## Build Setup
-clone到本地仓之后，自行`npm **`，都是老司机了，这里也不重复了。
+
 
 
 ``` bash
