@@ -74,6 +74,9 @@ export default {
 
     .wrap{
         height: 60px;
+        width: 1220px;
+        margin: 0 auto;
+        font-family:"Microsoft YaHei",Arial,Helvetica,sans-serif,"SimSun";
     }
     .logo{
         height: 29px;
@@ -100,7 +103,7 @@ export default {
         span{
             display: block;
             float: left;
-            margin: 0 4px;
+            margin: 0 9px;
         }
 
     }
@@ -111,7 +114,7 @@ export default {
 
     .ul{
         float: left;
-        margin-left: 414px;
+        margin-left: 404px;
         margin-right: 80px;
         height: 60px;
         background: #fff;

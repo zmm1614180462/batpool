@@ -1,26 +1,47 @@
 <template>
-  <div class="wrap">
-	<div class="logo">
-        <a href="/">BATPOOL</a>
-    </div>
-    <div class="lang">
-        <a :class="{act:activeName=='zh'}" @click="toggle('zh')" href="javascript:;">中文</a>
-        <span>/</span>
-        <a :class="{act:activeName=='en'}" @click="toggle('en')" href="javascript:;">EN</a>
-    </div>
-     <div class="ul">
-         <ul>
-             <li v-for="item in meau">
-                 <a :class="{actMeau:activeMeau==item}" href="javascript:;">{{item}}</a>
-             </li>
-         </ul>
-     </div>
+  <footer>
+        <div class="wrap">
 
-     <div class="login">
-         <a style="margin-right: 26px" href="javascript:;">登录</a>
-         <a class="reg-act" href="">注册</a>
-     </div>
-  </div>
+            <div class="tit1">
+                <ul class="clearfix">
+                    <li v-for="item in list">
+                        <a :href="item.url">
+                            {{item.name}}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <section class="foot-logo">
+                <ul class="clearfix">
+                    <li>
+                        <a class="lo" style="" href="">微博</a>
+                    </li>
+                    <li>
+                        <a class="lo" style=" " href="">qq</a>
+                    </li>
+                    <li>
+                        <a class="lo" style=" " href="">微信</a>
+                    </li>
+                    <li style="float: right">
+                        <a class="lo" style="" href="">百度</a>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="lang-t">
+                <a href="">中文</a>
+                <span>|</span>
+                <a href="">EN</a>
+            </section>
+
+            <div class="line"></div>
+
+            <div style="text-align: center;font-size: 12px;color: #999;margin-top: 20px">
+                Copyringht &copy 2017 Bitmain Technologies. All Rights Reserved&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;京公网安备 11010802022514号&nbsp;&nbsp;&nbsp;京ICP备15028173号-2
+            </div>
+        </div>
+  </footer>
 </template>
 
 <script>
@@ -33,8 +54,17 @@ import { XHeader } from 'vux'
 export default {
   data() {
     return {
-        activeName:'zh',
-        meau:['首页','统计','下载','帮助'],
+        list:[{
+            name: '关于我们', url: '',
+        },{
+            name:'使用教程',url:'',
+        },{
+            name:'常见问题',url:'',
+        }, {
+            name:'工具下载',url:'',
+        },{
+            name:'服务协议',url:'',
+        }]
     }
   },
   components: {
@@ -69,107 +99,110 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
     @import "../assets/css/color";
-
+    @footheight:258px; //底部高度
+    @background:#27364E; //背景颜色
+    @footwidth:1220px;
+    @listwidth:1220-(256*2);
+footer{
+    background: @background;
+}
+    .clearfix:after{
+       content: '';
+        height:0;//高度为0
+        line-height:0;//行高为0
+        display:block;//将文本转为块级元素
+        visibility:hidden;//将元素隐藏
+        clear:both//清除浮动
+    }
     .wrap{
-        height: 60px;
+        width: @footwidth;
+        margin:  0 auto;
+        height:@footheight
     }
-    .logo{
-        height: 29px;
-        float: left;
-        margin: 15px 41px 16px 0;
-        a{
-            display: block;
-            height: 29px;
-            text-indent: -999px;
-            width: 155px;
-            background: url('./Bitmap.png');
-        }
-    }
-
-    .lang{
-        font-size:14px;
-        float: left;
-        margin-top:28px;
-        margin-bottom: 13px;
-        a{
-            display: block;
-            float: left;
-        }
-        span{
-            display: block;
-            float: left;
-            margin: 0 4px;
-        }
-
-    }
-    .act{
-        color:@blue1;
-    }
-
-
-    .ul{
-        float: left;
-        margin-left: 414px;
-        margin-right: 80px;
-        height: 60px;
-        background: #fff;
+    .tit1{
         ul{
+            width: 708px;
+            margin: 0 auto;
             li{
-                height: 58px;
-                line-height: 60px;
-                width: 80px;
-                float: left;
+                width: 141.6px;
                 display: block;
-                list-style: none;
+                float: left;
+
                 a{
-                    font-size: 16px;
                     display: block;
-                    height: 58px;
-                    line-height: 60px;
+                    font-size:14px;
+                    color:#ddd;
                     text-align: center;
+                    margin-top: 42px;
+                    margin-bottom: 48px;
                 }
             }
         }
     }
-    .reg-act{
-        height: 40px;
-        width: 90px;
-        margin-top: 10px;
-        color: #fff!important;
-        background:@blue1;
-        text-align:center;
-        line-height: 40px;
+
+    .foot-logo{
+        width: @footwidth - 538 - 538;
+        margin: 0 auto;
+        margin-bottom: 27px;
+        ul{
+            li{
+                display: block;
+                float: left;
+                width: ( @footwidth - 538 - 538 ) / 4;
+                text-align: center;
+                a{
+                    color: #fff;
+                    width: 21px;
+
+                    text-indent: -9999px;
+                    display: block;
+                    margin: 0 auto;
+                }
+            }
+
+
+            li:nth-child(1)>a.lo{
+                width: 21px;
+                height: 16px;
+                background:url('./weiboicon.png')
+            }
+            li:nth-child(2)>a{
+                width: 16px;
+                height: 18px;
+                background:url('./qqicon.png')
+            }
+            li:nth-child(3)>a{
+                width: 21px;
+                height: 18px;
+                background:url('./weixinicon.png')
+            }
+            li:nth-child(4)>a{
+                width: 20px;
+                height: 21px;
+                background:url('./baiduicon.png')
+            }
+        }
+
+
     }
 
-    .actMeau{
-        border-bottom: 2px solid #1AA8F0;
-    }
-
-    .login{
+    .lang-t{
+        text-align: center;
+        color:#999;
         font-size: 14px;
-        float: left;
-        height: 60px;
-        line-height: 60px;
+        margin-bottom: 28px;
         a{
-            display: block;
-            float: left;
-            font-size: 16px;
-            color:@blue1;
+            color: #999;
+            font-size: 14px;
+        }
+        span{
+            color: #999;
         }
     }
-.headfix{
-	position: fixed!important;
-	z-index: 77;
-	width: 100%;
-	left: 0;
-	top: 0;
-}
 
-.headMargin{
-clear:both;
-height:50px;
-}
-
+    .line{
+        border-bottom: 1px solid #3f4b5e;
+    }
 </style>
