@@ -14,25 +14,12 @@ const mutations = {
     change(state,{type,val}){
         state.formdata[type] = val;
     },
-    add(context){
-      context.count++
-    },
-    decreases(context){
-        context.count--
-    }
+
 };
 
 
 const actions = {
-    add(add){
-        setTimeout(function () {
-            add.commit('add')
-        },2000)
 
-    },
-    decreases(decreases){
-        decreases.commit('decreases')
-    }
 };
 const getters = {
     count(context){
