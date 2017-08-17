@@ -56,9 +56,9 @@ export default {
 			});
 			
 			Lib.M.ajax({
-				'url':'api/Getdata/vue2_multipage_getajax_demo',
+				'url':'http://ltc.tbdice.org/js/json.php/livedata.json?rand=0.5202020538178679',
 				'success':function (data){
-					
+					console.log(data);
 					self.ajaxResult = data;
 					
 					setTimeout(()=>{

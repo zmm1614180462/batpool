@@ -15,16 +15,13 @@
          <div class="password" style="width:280px;margin: 0 auto ;margin-bottom: 40px">
             <myinput :attr="again"></myinput>
          </div>
-         <div @click="resetPass" class="logo-btn">重置密码</div>
-
+         <div @click="resetPass" class="logo-btn">完成</div>
          <!--获取验证码-->
       </div>
 
 
 
-
-
-      </div>
+   </div>
 
 </div>
 </template>
@@ -36,7 +33,6 @@ import Lib from 'assets/js/Lib';
 import Navbar  from 'components/NavBar.vue'
 import Foot from 'components/Foot.vue'
 import Myinput from 'components/MyInput.vue'
-import { Cell,Group,Divider } from 'vux'
 import {mapState,mapGetters,mapActions,mapMutations} from 'vuex'
 import css from 'assets/css/common.css'
 import username from 'assets/image/username.png'
@@ -63,7 +59,7 @@ export default {
       }
    },
   components: {
-	Navbar,Myinput,Divider
+	Navbar,Myinput
   },
   //实例初始化最之前，无法获取到data里的数据
   beforeCreate(){
@@ -83,20 +79,19 @@ export default {
   },
   //相关操作事件
   methods: {
-      getCode(){
+      resetPass(){
           let _this = this
-          //获取短信验证码调用ajax方法
+          let value = _this.$store.getters.formdata
+          //发送数据
           Lib.M.ajax({
               url:'http://www.cnblogs.com/jiangxiaobo/p/5425025.html',
+              data:{value},
               success:function (data) {
                   console.log(data)
               }
           })
-      },
-      resetPass(){
-          let value = this.$store.getters.formdata
-          console.log(value);
       }
+
       
   }
 }
@@ -173,30 +168,4 @@ export default {
       margin: 0 auto;
       background:#1879BE;
    }
-   /*获取验证码*/
-   .getc{
-      position: relative;
-      top:-5px;
-      display: block;
-      float: right;
-      width: 96px;
-      height: 30px;
-      border: 1px solid #ddd;
-      color: #999;
-      text-align: center;
-      line-height: 30px;
-      font-size: 12px;
-   }
-
-   .input-phone{
-      position: relative;
-      width: 250px;
-      margin-left: 30px;
-      height: 31px;
-      border-bottom: 1px solid #d8d8d8;
-      line-height: 31px;
-      font-size: 14px;
-
-   }
-
 </style>
