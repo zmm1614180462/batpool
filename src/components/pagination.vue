@@ -18,7 +18,7 @@
             <!--共多少数据可以用solt来使用-->
             <!--<span>共<em class="jump-total">{{totalPage}}</em>页 ，跳至</span>-->
             跳转至&nbsp;&nbsp;<input type="number" v-model="jumpPage" class="jump-input">
-            <span>页</span>
+            &nbsp;&nbsp;<span>页</span>
             <!--<a @click="go(jumpPage)">确定</a>-->
         </div>
     </div>

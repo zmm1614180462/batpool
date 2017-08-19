@@ -4,9 +4,9 @@
         <a href="/">BATPOOL</a>
     </div>
     <div class="lang">
-        <a :class="{act:activeName=='zh'}" @click="toggle('zh')" href="javascript:;">中文</a>
-        <span>/</span>
-        <a :class="{act:activeName=='en'}" @click="toggle('en')" href="javascript:;">EN</a>
+        <div class="la-lf"></div>
+        <div class="la-rt">BTC矿池</div>
+
     </div>
      <div class="ul">
          <ul>
@@ -17,8 +17,15 @@
      </div>
 
      <div class="login">
-         <a style="margin-right: 26px" href="javascript:;">登录</a>
-         <a class="reg-act" href="">注册</a>
+         <img style="float:left;margin-top: 14px;margin-right: 5px" src="../assets/image/头像.png" alt="">
+         <div class="lo-name">
+
+         </div>
+
+         <div class="news">
+             <img src="../assets/image/信息.png" alt="">
+             <div class="count" style="" >2</div>
+         </div>
      </div>
   </div>
 </template>
@@ -26,19 +33,18 @@
 <script>
 
 import Lib from 'assets/js/Lib';
+import headcoin from 'assets/image/头像.png'
 
-import { XHeader } from 'vux'
 
 
 export default {
   data() {
     return {
         activeName:'zh',
-        meau:['首页','统计','下载','帮助'],
+        meau:['算力面板','矿机列表','统计','下载','帮助'],
     }
   },
   components: {
-	XHeader
   },
   props:['activeMeau'],
   //实例初始化最之前，无法获取到data里的数据
@@ -71,7 +77,6 @@ export default {
 
 <style lang="less" scoped>
     @import "../assets/css/color";
-
     .wrap{
         height: 60px;
         width: 1220px;
@@ -81,7 +86,7 @@ export default {
     .logo{
         height: 29px;
         float: left;
-        margin: 15px 41px 16px 0;
+        margin: 15px 18px 16px 0;
         a{
             display: block;
             height: 29px;
@@ -92,10 +97,25 @@ export default {
     }
 
     .lang{
+        height: 32px;
+        margin-top: 15px;
+
         font-size:14px;
         float: left;
-        margin-top:28px;
-        margin-bottom: 13px;
+        .la-lf{
+            height: 32px;
+            width: 32px;
+            float: left;
+            border-radius:50%;
+            background:#d8d8d8;
+        }
+        .la-rt{
+            color:@blue1;
+            float: left;
+            margin-top: 8px;
+            margin-left: 10px;
+            font-size: 14px;
+        }
         a{
             display: block;
             float: left;
@@ -114,24 +134,28 @@ export default {
 
     .ul{
         float: left;
-        margin-left: 404px;
-        margin-right: 80px;
+        margin-left: 324px;
         height: 60px;
         background: #fff;
         ul{
             li{
-                height: 58px;
-                line-height: 60px;
-                width: 80px;
+                height: 60px -19;
+                margin-top: 19px;
                 float: left;
                 display: block;
                 list-style: none;
                 a{
+                    font-family:"Microsoft YaHei",Arial,Helvetica,sans-serif,"SimSun";
+                    color: #333;
                     font-size: 16px;
                     display: block;
-                    height: 58px;
-                    line-height: 60px;
-                    text-align: center;
+                    margin-left: 44px;
+                }
+
+            }
+            li:nth-child(1){
+                a{
+                    margin-left: 0px;
                 }
             }
         }
@@ -151,15 +175,28 @@ export default {
     }
 
     .login{
+        width: 1220px - 1052;
+
         font-size: 14px;
-        float: left;
+        float: right;
         height: 60px;
         line-height: 60px;
-        a{
-            display: block;
-            float: left;
-            font-size: 16px;
-            color:@blue1;
+        .count{
+            position: absolute;font-size: 12px;width: 15px;height: 15px;border-radius: 50%;line-height: 15px;
+            background: rgba(28, 149, 212, 0.78);top:8px;right: -8px;
+            text-align: center;color: #fff;
+        }
+
+    }
+
+
+    .news{
+        cursor: pointer;
+        margin-right: 9px;
+        float: right;
+        position: relative;
+        img{
+            margin-top: 19px;
         }
     }
 .headfix{
