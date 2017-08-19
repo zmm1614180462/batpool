@@ -218,11 +218,14 @@ export default {
         height: 48px;
         line-height: 50px;
         text-align: center;
-        margin-right: 40px;
+        margin-left: 39px;
         border: 1px solid #ddd;
         cursor: pointer;
         color: #666;
         position: relative;
+    }
+    li:nth-child(1){
+        margin-left: 0;
     }
     li.ret{
         margin-right: 0;
