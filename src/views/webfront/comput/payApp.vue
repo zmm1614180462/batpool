@@ -1,55 +1,16 @@
 
 <template>
  <div>
-	 <div class="t1" style="margin-bottom: 40px;position: relative">
-         <div style="height: 60px;padding-left:33px;background: #D0E9F7;font-size: 16px;line-height: 60px;color: #333">触发条件列表</div>
-         <div class="condition">
-             <ul class="clearfix top" style="display: block;">
-                 <li style="margin-right: 153px">联系人</li><li style="margin-right: 196px">联系方式</li><li style="margin-right: 245px">条件</li><li style="margin-right: 264px">设置时间</li><li >操作</li>
-             </ul>
-             <!--没登录-->
-             <div v-if="auth==0">
-                 <div class="clearfix noLogin" >登录查看数据 <a href="javascript:;" class="noa">登录</a></div>
-             </div>
-             <!--登录-->
-
-             <div v-if="auth==1">
-                <div class="login-t" v-for="item in 5">
-                    <ul class="clearfix" style="display: block">
-                        <li style="width: 200px" >小明</li>
-                        <li style="width: 258px">短信、邮箱、站内</li>
-                        <li style="width: 278px">低于 29.21 TH/s 或 低于 19 台</li>
-                        <li >2017-07-23 16:17:35</li>
-                        <li style="float: right;margin-right: 28px">
-                            <!--要删除的id-->
-                            <img @click="edit(0)" style="margin-right: 32px;cursor: pointer" src="../../../assets/image/编辑.png" alt="">
-                            <img @click="remove(0)" style="cursor: pointer" src="../../../assets/image/删除.png" alt="" >
-                        </li>
-                    </ul>
-                </div>
-
-                 <!--新建出发资料-->
-                 <a @click="trigger" class="trigger clearfix" href="javascript:;">
-                     <div style="font-size: 24px;float: left;margin-left: 18px">+</div>
-                     <div style="font-size: 14px;float: right;margin-right: 18px">添加触发资料</div>
-                 </a>
-             </div>
-         </div>
-         <!--&lt;!&ndash;弹出框&ndash;&gt;-->
-         <!--<div class="" style="position: fixed;top:0;right: 0;left: 0;bottom: 0;width: 100%;height: 100%;background: rgba(0, 0, 0, 0.6);overflow: hidden">-->
-                <!--<div class="" style="width: 200px;height: 300px;margin: 0 auto;background: red"></div>-->
-         <!--</div>-->
-     </div>
-
-<!--预警日志-->
+<!--付款记录-->
 
      <div class="t1">
-         <div style="height: 60px;padding-left:33px;background: #D0E9F7;font-size: 16px;line-height: 60px;color: #333">预警日志</div>
-         <div class="condition">
+         <div style="height: 60px;padding-left:33px;background: #D0E9F7;font-size: 16px;line-height: 60px;color: #333">
              <ul class="clearfix top" style="display: block;">
-                 <li style="margin-right: 66px">联系人</li><li style="margin-right: 134px">手机号</li><li style="margin-right: 533px">内容</li><li style="margin-right: 167px">发送时间</li><li>状态</li>
+             <li style="margin-right: 91px">币种</li><li style="margin-right: 137px">地址与交易</li><li style="margin-right: 142px">日均算力</li><li style="margin-right: 111px">当日理论收益（1TH/s）</li><li style="margin-right: 146px">收益</li><li>时间</li>
 
-             </ul>
+         </ul></div>
+         <div class="condition">
+
 
              <div v-if="auth==0">
                  <div class="clearfix noLogin" >登录查看数据 <a href="javascript:;" class="noa">登录</a></div>
@@ -57,15 +18,14 @@
 
              <!--登录查看预警资料-->
              <div v-if="auth==1">
-                 <div class="login-t" v-for="item in itemDate">
+                 <div class="mpay" v-for="item in itemDate">
                      <ul class="clearfix" style="display: block">
-                         <li style="width: 112px" >{{ item.name }}</li>
-                         <li style="width: 182px">+86 {{ item.phone }}</li>
-                         <li style="width: 566px">您的TEXT1下的BTC活跃矿工数已低于20，当前矿机18/22，实时算力201.21TH/s。</li>
-                         <li style="width: 234px"> {{item.date}} </li>
-                         <li >
-                            发送成功
-                         </li>
+                         <li style="width: 123px" ><div style="width: 26px;height: 26px;border-radius: 50%;background: #d8d8d8;margin-top: 14px"></div></li>
+                         <li style="width: 217px">+86 {{ item.phone }}</li>
+                         <li style="width: 206px">285.23 TH/s</li>
+                         <li style="width: 280px">0.0005608 BTC</li>
+                         <li style="width: 178px">13.36456010 BTC</li>
+                         <li >2017/07/26  09:32:42</li>
 
                      </ul>
                  </div>
@@ -110,11 +70,18 @@ export default {
     beforeMount(){
 
     },
-
-        created(){
+    beforeRouteEnter(to,from,next){
+        Lib.M.ajax({
+            'url':'http://localhost:3000/people/?_page=1&_limit=6',
+            'type':'get',
+            success(data){
+                next(vm=>{vm.itemDate=data})
+            }
+        });
+    },
+    created(){
 //      初始化数据
-        this.$store.commit('changeUrl',{url:'/warn'});
-      console.log(document.documentElement.clientWidth,document.body.clientWidth)
+        this.$store.commit('changeUrl',{url:"/pay"});
       this.allDate = 100;
       let _this = this;
       let limit = this.limit;
@@ -123,7 +90,6 @@ export default {
 
         totalPage(){ //总页数
             var _this = this;
-
             Lib.M.ajax({
                 'url':'http://localhost:3000/people/?_page=1&_limit='+_this.limit,
                 'type':'get',
@@ -207,6 +173,14 @@ export default {
     font-size: 14px;
     vertical-align: top;
 }
+
+    .top{
+        height: 55px;
+        li{
+            display: block;float: left;
+            color: #333;font-size: 16px;
+        }
+    }
 .clearfix:after{
     content: '';
     height:0;//高度为0
@@ -220,13 +194,7 @@ export default {
         padding-right: 16px;
         border: 1px solid #ddd;
         border-top:none;
-        .top{
-            height: 55px;border-bottom: 1px solid #ddd;
-            li{
-                display: block;float: left;
-                padding-top: 24px;color: #333;font-size: 16px;
-            }
-        }
+
     }
 
     .noLogin{
@@ -252,4 +220,33 @@ export default {
     width:150px;height: 40px;display: block;border: 1px solid #ddd;line-height: 40px;color: #666;
     margin: 0 auto;margin-top: 38px;margin-bottom: 34px;
 }
+
+    .mpay{
+        height: 51px;
+        line-height: 52px;
+        border-bottom:1px solid #ddd;
+        font-size: 14px;
+        color: #666;
+        ul{
+            display: block;
+            li{
+                display: block;
+                float: left;
+
+            }
+        }
+        .a1{
+            display: block;
+            float: left;
+            line-height:23px;
+            width: 66px;height: 22px;text-align: center;border: 1px solid #ddd;margin-right: 9px;
+            margin-top: 13px;
+        }
+        .a2{
+            color: #1C95D4;
+        }
+    }
+    .mpay:nth-child(0){
+        border:none;
+    }
 </style>

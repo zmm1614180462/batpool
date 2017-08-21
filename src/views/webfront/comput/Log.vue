@@ -1,73 +1,38 @@
 
 <template>
  <div>
-	 <div class="t1" style="margin-bottom: 40px;position: relative">
-         <div style="height: 60px;padding-left:33px;background: #D0E9F7;font-size: 16px;line-height: 60px;color: #333">触发条件列表</div>
-         <div class="condition">
-             <ul class="clearfix top" style="display: block;">
-                 <li style="margin-right: 153px">联系人</li><li style="margin-right: 196px">联系方式</li><li style="margin-right: 245px">条件</li><li style="margin-right: 264px">设置时间</li><li >操作</li>
-             </ul>
-             <!--没登录-->
-             <div v-if="auth==0">
-                 <div class="clearfix noLogin" >登录查看数据 <a href="javascript:;" class="noa">登录</a></div>
-             </div>
-             <!--登录-->
 
-             <div v-if="auth==1">
-                <div class="login-t" v-for="item in 5">
-                    <ul class="clearfix" style="display: block">
-                        <li style="width: 200px" >小明</li>
-                        <li style="width: 258px">短信、邮箱、站内</li>
-                        <li style="width: 278px">低于 29.21 TH/s 或 低于 19 台</li>
-                        <li >2017-07-23 16:17:35</li>
-                        <li style="float: right;margin-right: 28px">
-                            <!--要删除的id-->
-                            <img @click="edit(0)" style="margin-right: 32px;cursor: pointer" src="../../../assets/image/编辑.png" alt="">
-                            <img @click="remove(0)" style="cursor: pointer" src="../../../assets/image/删除.png" alt="" >
-                        </li>
-                    </ul>
-                </div>
 
-                 <!--新建出发资料-->
-                 <a @click="trigger" class="trigger clearfix" href="javascript:;">
-                     <div style="font-size: 24px;float: left;margin-left: 18px">+</div>
-                     <div style="font-size: 14px;float: right;margin-right: 18px">添加触发资料</div>
-                 </a>
-             </div>
-         </div>
-         <!--&lt;!&ndash;弹出框&ndash;&gt;-->
-         <!--<div class="" style="position: fixed;top:0;right: 0;left: 0;bottom: 0;width: 100%;height: 100%;background: rgba(0, 0, 0, 0.6);overflow: hidden">-->
-                <!--<div class="" style="width: 200px;height: 300px;margin: 0 auto;background: red"></div>-->
-         <!--</div>-->
-     </div>
-
-<!--预警日志-->
+<!--矿机日志-->
 
      <div class="t1">
          <div style="height: 60px;padding-left:33px;background: #D0E9F7;font-size: 16px;line-height: 60px;color: #333">预警日志</div>
          <div class="condition">
-             <ul class="clearfix top" style="display: block;">
-                 <li style="margin-right: 66px">联系人</li><li style="margin-right: 134px">手机号</li><li style="margin-right: 533px">内容</li><li style="margin-right: 167px">发送时间</li><li>状态</li>
-
-             </ul>
 
              <div v-if="auth==0">
-                 <div class="clearfix noLogin" >登录查看数据 <a href="javascript:;" class="noa">登录</a></div>
+                 <div class="login-t2">
+                     <div class="clearfix noLogin" >登录查看数据 <a href="javascript:;" class="noa">登录</a></div>
+                 </div>
+
              </div>
 
              <!--登录查看预警资料-->
              <div v-if="auth==1">
-                 <div class="login-t" v-for="item in itemDate">
-                     <ul class="clearfix" style="display: block">
-                         <li style="width: 112px" >{{ item.name }}</li>
-                         <li style="width: 182px">+86 {{ item.phone }}</li>
-                         <li style="width: 566px">您的TEXT1下的BTC活跃矿工数已低于20，当前矿机18/22，实时算力201.21TH/s。</li>
-                         <li style="width: 234px"> {{item.date}} </li>
-                         <li >
-                            发送成功
-                         </li>
+                 <div class="login-t clearfix" v-for="item in itemDate">
+                     <div class="log clearfix" style="">
+                         <div style="float:left">{{item.name}}</div>
+                         <div style="float:right">{{item.date}}</div>
+                     </div>
+                     <!--<ul class="clearfix" style="display: block">-->
+                         <!--<li style="width: 112px" >{{ item.name }}</li>-->
+                         <!--<li style="width: 182px">+86 {{ item.phone }}</li>-->
+                         <!--<li style="width: 566px">您的TEXT1下的BTC活跃矿工数已低于20，当前矿机18/22，实时算力201.21TH/s。</li>-->
+                         <!--<li style="width: 234px"> {{item.date}} </li>-->
+                         <!--<li >-->
+                            <!--发送成功-->
+                         <!--</li>-->
 
-                     </ul>
+                     <!--</ul>-->
                  </div>
 
                  <!--分页-->
@@ -106,14 +71,24 @@ import Pag from 'components/pagination'
 
 
 export default {
-  name: 'warn',
+  name: 'log',
     beforeMount(){
 
     },
-
-        created(){
+    beforeRouteEnter(to,from,next){
+        Lib.M.ajax({
+            'url':'http://localhost:3000/people/?_page=1&_limit=6',
+            'type':'get',
+            success(data){
+                next(vm=>{vm.itemDate=data})
+//                _this.itemDate=data;
+//                console.log(data)
+            }
+        });
+    },
+    created(){
 //      初始化数据
-        this.$store.commit('changeUrl',{url:'/warn'});
+        this.$store.commit('changeUrl',{url:'/log'});
       console.log(document.documentElement.clientWidth,document.body.clientWidth)
       this.allDate = 100;
       let _this = this;
@@ -123,7 +98,6 @@ export default {
 
         totalPage(){ //总页数
             var _this = this;
-
             Lib.M.ajax({
                 'url':'http://localhost:3000/people/?_page=1&_limit='+_this.limit,
                 'type':'get',
@@ -160,7 +134,6 @@ export default {
       goPage(data){
         this.page = data.page;
         var _this = this;
-        console.log(data.page)
         let limit = _this.limit;
 
           Lib.M.ajax({
@@ -230,7 +203,7 @@ export default {
     }
 
     .noLogin{
-        margin-left:478px;margin-top: 126px;margin-right: 494px;line-height: 30px
+        margin-left:478px;margin-top: 250px;margin-right: 494px;line-height: 30px
     }
     .noa{
         width: 86px;height: 30px;line-height: 30px;background:#1C95D4;display: block;float: right;text-align: center;
@@ -239,13 +212,21 @@ export default {
 
     /*登录触发条件列表*/
     .login-t{
-        height: 40px - 21;
-        padding-top: 21px;
         font-size: 14px;
         color: #666;
         ul{
             li{display: block;float: left}
         }
+    }
+    .login-t2{
+        height: 640px - 21;
+        padding-top: 21px;
+
+    }
+    .log{
+        height: 60px;
+        line-height: 60px;
+        border-bottom: 1px solid #d8d8d8;
     }
     /*触发*/
 .trigger{
