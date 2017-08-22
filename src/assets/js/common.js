@@ -54,7 +54,7 @@ var Rxports = {
 				if (data.error) {
 					opts.error(error);
 				}else{
-					alert('好多人在访问呀，请重新试试[timeout]');
+					console.log('请求错误')
 				}
 				
 			}
