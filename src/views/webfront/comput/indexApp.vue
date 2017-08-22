@@ -18,7 +18,7 @@
    </div>
 
    <div style="margin-top: 80px">  <foot></foot></div>
-
+   <!--<Page :current="1" :total="100"></Page>-->
 
 
 
@@ -37,6 +37,8 @@ import VueRouter from 'vue-router'
 import Foot from 'components/Foot'
 
 
+import Page from 'iview/src/components/page';
+import 'iview/dist/styles/iview.css';
 
 
 

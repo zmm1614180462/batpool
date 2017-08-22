@@ -10,6 +10,8 @@ import Warn from './warnApp.vue'
 import VueRouter from 'vue-router'
 import Log from './Log.vue'
 import Pay from './payApp.vue'
+
+
 const routes = [
     { path: '/', component: All },
     { path: '/warn', component: Warn },

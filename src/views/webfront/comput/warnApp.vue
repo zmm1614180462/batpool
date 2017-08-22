@@ -1,6 +1,17 @@
 
 <template>
+
  <div>
+     <Modal
+             v-model="modal1"
+             title="新建触发条件"
+             @on-ok="ok"
+             @on-cancel="cancel" width="1220">
+         <p>对话框内容</p>
+         <p>对话框内容</p>
+         <p>对话框内容</p>
+     </Modal>
+
 	 <div class="t1" style="margin-bottom: 40px;position: relative">
          <div style="height: 60px;padding-left:33px;background: #D0E9F7;font-size: 16px;line-height: 60px;color: #333">触发条件列表</div>
          <div class="condition">
@@ -31,7 +42,8 @@
                  <!--新建出发资料-->
                  <a @click="trigger" class="trigger clearfix" href="javascript:;">
                      <div style="font-size: 24px;float: left;margin-left: 18px">+</div>
-                     <div style="font-size: 14px;float: right;margin-right: 18px">添加触发资料</div>
+
+                     <div @click="modal1 = true"  style="font-size: 14px;float: right;margin-right: 18px">添加触发资料</div>
                  </a>
              </div>
          </div>
@@ -103,7 +115,7 @@
 import Lib from 'assets/js/Lib';
 
 import Pag from 'components/pagination'
-
+import Modal from 'iview/src/components/modal'
 
 export default {
   name: 'warn',
@@ -123,7 +135,6 @@ export default {
 
         totalPage(){ //总页数
             var _this = this;
-
             Lib.M.ajax({
                 'url':'http://localhost:3000/people/?_page=1&_limit='+_this.limit,
                 'type':'get',
@@ -143,10 +154,11 @@ export default {
 
     },
   components: {
-      Pag,
+      Pag,Modal
   },
   data () {
     return {
+        modal1:false,
         url:'', //要请求的url链接
         itemDate:[], //联系人信息
         allDate:0,  //总数据条数
@@ -157,6 +169,12 @@ export default {
     }
   },
   methods: {
+      ok(){
+          this.$Message.info('点击了确定');
+      },
+      cancel () {
+          this.$Message.info('点击了取消');
+      },
       goPage(data){
         this.page = data.page;
         var _this = this;
@@ -239,7 +257,7 @@ export default {
 
     /*登录触发条件列表*/
     .login-t{
-        height: 40px - 21;
+
         padding-top: 21px;
         font-size: 14px;
         color: #666;
