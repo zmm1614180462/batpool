@@ -2,15 +2,7 @@
 <template>
 
  <div>
-     <Modal
-             v-model="modal1"
-             title="新建触发条件"
-             @on-ok="ok"
-             @on-cancel="cancel" width="1220">
-         <p>对话框内容</p>
-         <p>对话框内容</p>
-         <p>对话框内容</p>
-     </Modal>
+
 
 	 <div class="t1" style="margin-bottom: 40px;position: relative">
          <div style="height: 60px;padding-left:33px;background: #D0E9F7;font-size: 16px;line-height: 60px;color: #333">触发条件列表</div>
@@ -25,25 +17,28 @@
              <!--登录-->
 
              <div v-if="auth==1">
-                <div class="login-t" v-for="item in 5">
-                    <ul class="clearfix" style="display: block">
-                        <li style="width: 200px" >小明</li>
-                        <li style="width: 258px">短信、邮箱、站内</li>
-                        <li style="width: 278px">低于 29.21 TH/s 或 低于 19 台</li>
-                        <li >2017-07-23 16:17:35</li>
-                        <li style="float: right;margin-right: 28px">
-                            <!--要删除的id-->
-                            <img @click="edit(0)" style="margin-right: 32px;cursor: pointer" src="../../../assets/image/编辑.png" alt="">
-                            <img @click="remove(0)" style="cursor: pointer" src="../../../assets/image/删除.png" alt="" >
-                        </li>
-                    </ul>
+                <div class="clearfix" v-for="item in 6">
+                    <div class="login-t">
+                        <ul class="clearfix" style="display: block">
+                            <li style="width: 200px" >小明</li>
+                            <li style="width: 258px">短信、邮箱、站内</li>
+                            <li style="width: 278px">低于 29.21 TH/s 或 低于 19 台</li>
+                            <li >2017-07-23 16:17:35</li>
+                            <li style="float: right;margin-right: 28px">
+                                <!--要删除的id-->
+                                <img @click="edit(0)" style="margin-right: 32px;cursor: pointer" src="../../../assets/image/编辑.png" alt="">
+                                <img @click="remove(0)" style="cursor: pointer" src="../../../assets/image/删除.png" alt="" >
+                            </li>
+                        </ul>
+                    </div>
+
                 </div>
 
                  <!--新建出发资料-->
                  <a @click="trigger" class="trigger clearfix" href="javascript:;">
                      <div style="font-size: 24px;float: left;margin-left: 18px">+</div>
 
-                     <div @click="modal1 = true"  style="font-size: 14px;float: right;margin-right: 18px">添加触发资料</div>
+                     <div @click="OpenAlert" style="font-size: 14px;float: right;margin-right: 18px">添加触发资料</div>
                  </a>
              </div>
          </div>
@@ -52,6 +47,8 @@
                 <!--<div class="" style="width: 200px;height: 300px;margin: 0 auto;background: red"></div>-->
          <!--</div>-->
      </div>
+
+     <alert></alert>
 
 <!--预警日志-->
 
@@ -73,7 +70,7 @@
                      <ul class="clearfix" style="display: block">
                          <li style="width: 112px" >{{ item.name }}</li>
                          <li style="width: 182px">+86 {{ item.phone }}</li>
-                         <li style="width: 566px">您的TEXT1下的BTC活跃矿工数已低于20，当前矿机18/22，实时算力201.21TH/s。</li>
+                         <li style="width: 566px">您的TEXT1下的BTC活跃矿工数已低于21，当前矿机18/22，实时算力201.21TH/s。</li>
                          <li style="width: 234px"> {{item.date}} </li>
                          <li >
                             发送成功
@@ -115,18 +112,18 @@
 import Lib from 'assets/js/Lib';
 
 import Pag from 'components/pagination'
-import Modal from 'iview/src/components/modal'
 
+import Alert from './alert.vue'
+import {mapMutations} from 'vuex'
 export default {
   name: 'warn',
     beforeMount(){
 
     },
 
-        created(){
+    created(){
 //      初始化数据
-        this.$store.commit('changeUrl',{url:'/warn'});
-      console.log(document.documentElement.clientWidth,document.body.clientWidth)
+ this.$store.commit('changeUrl',{url:'/warn'});
       this.allDate = 100;
       let _this = this;
       let limit = this.limit;
@@ -139,8 +136,8 @@ export default {
                 'url':'http://localhost:3000/people/?_page=1&_limit='+_this.limit,
                 'type':'get',
                 success(data){
+                    console.log('zzz');
                     _this.itemDate=data;
-                    console.log(data)
                 }
             });
             if(this.limit==0){
@@ -154,11 +151,10 @@ export default {
 
     },
   components: {
-      Pag,Modal
+      Pag,Alert
   },
   data () {
     return {
-        modal1:false,
         url:'', //要请求的url链接
         itemDate:[], //联系人信息
         allDate:0,  //总数据条数
@@ -169,16 +165,10 @@ export default {
     }
   },
   methods: {
-      ok(){
-          this.$Message.info('点击了确定');
-      },
-      cancel () {
-          this.$Message.info('点击了取消');
-      },
+      ...mapMutations(['OpenAlert']),
       goPage(data){
         this.page = data.page;
         var _this = this;
-        console.log(data.page)
         let limit = _this.limit;
 
           Lib.M.ajax({
@@ -248,16 +238,21 @@ export default {
     }
 
     .noLogin{
-        margin-left:478px;margin-top: 126px;margin-right: 494px;line-height: 30px
+        height: 150px;
+        margin-left:478px;margin-top: 126px;margin-right: 494px;line-height: 35px
     }
     .noa{
         width: 86px;height: 30px;line-height: 30px;background:#1C95D4;display: block;float: right;text-align: center;
         color: #fff;
     }
 
-    /*登录触发条件列表*/
-    .login-t{
+    /*触发*/
+.trigger{
+    width:150px;height: 40px;display: block;border: 1px solid #ddd;line-height: 40px;color: #666;
+    margin: 0 auto;margin-top: 38px;margin-bottom: 34px;
+}
 
+    .login-t{
         padding-top: 21px;
         font-size: 14px;
         color: #666;
@@ -265,9 +260,4 @@ export default {
             li{display: block;float: left}
         }
     }
-    /*触发*/
-.trigger{
-    width:150px;height: 40px;display: block;border: 1px solid #ddd;line-height: 40px;color: #666;
-    margin: 0 auto;margin-top: 38px;margin-bottom: 34px;
-}
 </style>

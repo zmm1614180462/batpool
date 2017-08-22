@@ -207,7 +207,6 @@ export default {
 
     /*登录触发条件列表*/
     .login-t{
-        height: 40px - 21;
         padding-top: 21px;
         font-size: 14px;
         color: #666;

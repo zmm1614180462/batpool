@@ -9,6 +9,7 @@ let state = {
     user:{}, //用户信息，
     currentPage:1,
     atcList:'/', //当前页面路由
+    showAlert:false  //弹出层
 
 };
 
@@ -20,6 +21,13 @@ const mutations = {
     },
     changeUrl(state,{url}){
         state.atcList = url;
+    },
+
+    OpenAlert(state){
+        state.showAlert = true;
+    },
+    CloseAlert(state){
+        state.showAlert = false;
     }
 
 };
@@ -32,7 +40,10 @@ const getters = {
     formdata(state){
         return state.formdata
     },
-    currentUrl:state => {return state.atcList}
+    currentUrl:state => {return state.atcList},
+    currentAlert(state){
+        return state.showAlert;
+    }
 };
 
 

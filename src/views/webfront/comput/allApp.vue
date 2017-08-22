@@ -9,13 +9,14 @@
              <div class="list1">
                  <div class="p1">
                      <span>付款记录</span>
-                     <a href="javascript:;">更多</a>
+                     <router-link to="/pay">更多</router-link>
+
                  </div>
 
                  <div class="con">
                     <div class="t1">
                         <ul class="clearfix">
-                            <li style="margin-left: 10px">币种</li><li style="margin-left: 34px;">地址与交易</li><li style="margin-left: 77px">日均算力</li><li style="margin-left: 65px">当日理论收益（1TH/s）</li><li style="margin-left: 15px">收益</li><li style="margin-left: 90px">时间</li>
+                            <li style="margin-left: 10px">币种</li><li style="margin-left: 34px;">地址与交易</li><li style="margin-left: 77px">日均算力</li><li style="margin-left: 50px">当日理论收益（1TH/s）</li><li style="margin-left: 15px">收益</li><li style="margin-left: 90px">时间</li>
 
                         </ul>
 
@@ -44,7 +45,7 @@
              <div class="list2">
                  <div class="p1">
                      <span>矿机日志</span>
-                     <a href="javascript:;">更多</a>
+                     <router-link to="/log">更多</router-link>
                  </div>
 
                  <div class="con2">
@@ -319,7 +320,6 @@ export default {
     }
 /*警告日志*/
     .warn-log{
-        height: 289px;
         padding-top: 20px;
         border: 1px solid #ddd;
         border-top: 0px;
@@ -335,6 +335,7 @@ export default {
         .warn-button{
             display: block;width: 120px;height: 30px;border: 1px solid #ddd;
             line-height: 30px;margin: 0 auto;color: #666;text-align: center;
+            margin-bottom: 22px;
         }
     }
 </style>
