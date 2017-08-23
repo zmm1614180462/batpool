@@ -4,14 +4,14 @@
     <div class="pager-wrapper" v-if="totalPage > 0">
         <div class="pager-pages">
             <!--<a v-show="currentPage > 1 && showPrev" @click="go(currentPage - 1)"> < </a>-->
-            <a @click="go(currentPage - 1)"> < </a>
-            <a :class="{active: currentPage == 1 ? true : false}" @click="go(1)">1</a>
+            <a href="javascript:;" @click="go(currentPage - 1)"> < </a>
+            <a href="javascript:;" :class="{active: currentPage == 1 ? true : false}" @click="go(1)">1</a>
             <strong v-show="pages[0] > 2">...</strong>
-            <a v-for="page in pages" :class="{active: currentPage == page ? true : false}" @click="go(page)">{{page}}</a>
+            <a href="javascript:;" v-for="page in pages" :class="{active: currentPage == page ? true : false}" @click="go(page)">{{page}}</a>
             <strong v-show="pages[pages.length-1] < totalPage - 1">...</strong>
-            <a v-if="totalPage > 1" :class="{active: currentPage == totalPage ? true : false}" @click="go(totalPage)">{{totalPage}}</a>
+            <a href="javascript:;" v-if="totalPage > 1" :class="{active: currentPage == totalPage ? true : false}" @click="go(totalPage)">{{totalPage}}</a>
             <!--<a v-show="currentPage < totalPage && showNext" @click="go(currentPage + 1)"> > </a>-->
-            <a  @click="go(currentPage + 1)"> > </a>
+            <a href="javascript:;" @click="go(currentPage + 1)"> > </a>
         </div>
         <!--<div v-if="showJump" v-show="totalPage > 1" class="pager-jump">-->
         <div  class="pager-jump">
