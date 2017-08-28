@@ -42,13 +42,15 @@ import Foot from 'components/Foot'
 
 export default {
   created(){
+      var url = this.$route.path
+      this.$store.commit('changeUrl',{url:url});
       this.atcList = this.$route.path;
   },
   data() {
 
     return {
 
-      list:[{name:'我的账户',url:'/'},{name:'子账户管理',url:'/warn'},{name:'收款记录',url:'/log'},
+      list:[{name:'我的账户',url:'/'},{name:'子账户管理',url:'/count'},{name:'收款记录',url:'/log'},
           {name:'矿机日志',url:'/pay'},{name:'账户设置',url:'/'},{name:'消息盒子',url:'/'}],
     }
   },

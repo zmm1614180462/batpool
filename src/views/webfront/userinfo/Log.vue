@@ -87,8 +87,6 @@ export default {
         });
     },
     created(){
-//      初始化数据
-        this.$store.commit('changeUrl',{url:'/log'});
       console.log(document.documentElement.clientWidth,document.body.clientWidth)
       this.allDate = 100;
       let _this = this;

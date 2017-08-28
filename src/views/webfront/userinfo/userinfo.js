@@ -5,8 +5,8 @@ import App from './indexApp'
 import store from './store.js'
 
 //添加vue router
-import All from './allApp.vue'
-import Warn from './mycount.vue'
+import Count from './count.vue'
+import MyCount from './mycount.vue'
 import VueRouter from 'vue-router'
 import Log from './Log.vue'
 import Pay from './payApp.vue'
@@ -21,8 +21,8 @@ import Pay from './payApp.vue'
  * @type {[null,null,null,null]}
  */
 const routes = [
-    { path: '/', component: All },
-    { path: '/warn', component: Warn },
+    { path: '/', component: MyCount },
+    { path: '/count', component: Count },
     { path:'/log',component: Log },
     { path:'/pay',component:Pay}
 ]

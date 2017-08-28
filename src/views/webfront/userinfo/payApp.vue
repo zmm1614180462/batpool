@@ -9,7 +9,7 @@
              <li style="margin-right: 91px">币种</li><li style="margin-right: 137px">地址与交易</li><li style="margin-right: 142px">日均算力</li><li style="margin-right: 111px">当日理论收益（1TH/s）</li><li style="margin-right: 146px">收益</li><li>时间</li>
 
          </ul></div>
-         <div class="condition">
+         <div class="condition" >
 
 
              <div v-if="auth==0">
@@ -17,7 +17,7 @@
              </div>
 
              <!--登录查看预警资料-->
-             <div v-if="auth==1">
+             <div v-if="auth==1" >
                  <div class="mpay" v-for="item in itemDate">
                      <ul class="clearfix" style="display: block">
                          <li style="width: 123px" ><div style="width: 26px;height: 26px;border-radius: 50%;background: #d8d8d8;margin-top: 14px"></div></li>
@@ -80,8 +80,6 @@ export default {
         });
     },
     created(){
-//      初始化数据
-        this.$store.commit('changeUrl',{url:"/pay"});
       this.allDate = 100;
       let _this = this;
       let limit = this.limit;

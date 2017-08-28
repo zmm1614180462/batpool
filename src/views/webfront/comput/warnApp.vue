@@ -136,7 +136,6 @@ export default {
                 'url':'http://localhost:3000/people/?_page=1&_limit='+_this.limit,
                 'type':'get',
                 success(data){
-                    console.log('zzz');
                     _this.itemDate=data;
                 }
             });

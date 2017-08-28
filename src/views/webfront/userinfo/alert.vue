@@ -21,7 +21,7 @@
                             <div class="inp">算力优于<input type="number">TH/s</div>
 
                     </div>
-                    <div class="con-right clearfix">
+                    <div class="con-right clearfix" >
                             <input class="magic-checkbox" type="checkbox" name="layout" id="c2" v-model="single" value="Nomal2" >
                             <label style="float: left;line-height: 30px" for="c2">开启</label>
                             <div class="inp" style="margin-right: 130px">活跃矿工低于<input type="number">TH/s</div>
