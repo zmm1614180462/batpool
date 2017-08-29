@@ -1,13 +1,12 @@
 
 <template>
  <div >
-     <p style="margin-bottom: 20px;font-size: 18px">子账户算力与收益</p>
-
-
+     <p style="margin-bottom: 20px;font-size: 18px">子账户算力与收益</p>   
+     <build></build>   
      <div class="t1" style="margin-bottom: 40px;position: relative">
          <div class="clearfix head" >
              <ul class="clearfix">
-                 <li style="margin-left: 358px">5分钟算力
+                 <li style="margin-left: 358px">15分钟算力
                  </li><li style="margin-left: 128px">24小时算力
              </li><li style="margin-left: 110px">矿机数
              </li><li style="margin-left: 112px">24小时收益
@@ -27,6 +26,39 @@
      </div>
 
 
+    <p style="margin-bottom: 20px;font-size: 18px">账户算力与收益合计</p>
+
+    <!-- 账户算力与收益合计 -->
+    <div>
+        <div class="clearfix head" >
+             <ul class="clearfix">
+                 <li style="margin-left:21px">币种</li>
+                 <li style="margin-left:254px">15分钟算力
+                 </li><li style="margin-left: 160px">24小时算力
+             </li><li style="margin-left: 157px">矿机数
+             </li><li style="margin-left: 216px">24小时收益</li>
+            
+             </ul>
+         </div>
+
+         <div class="body2">
+             <div class="con2" v-for="item in 5">
+                <ul class="clearfix">
+                    <li class="clearfix" style="margin-left:23px;width:290px;">
+                        <div style="background: #D8D8D8;width:25px;height:25px;border-radius:50%;position:relative;top:17px;float:left;"></div>
+
+                        <div style="float:left;margin-left:11px;">比特币矿池</div>
+
+                        </li><li style="width:243px">232.22 TH/s
+                            </li><li style="width:240px;">232.22 TH/s</li><li style="width:264px;">23/32台
+                                </li><li style="">232.22 TH/s</li>
+                </ul>
+             </div>
+         </div>
+    </div>
+
+
+
 
  </div>
 </template>
@@ -37,7 +69,7 @@ import Lib from 'assets/js/Lib';
 import Foot from 'components/Foot'
 import Pag from 'components/pagination'
 
-import Alert from './alert.vue'
+import Build from './build.vue'
 import {mapMutations} from 'vuex'
 export default {
   name: 'count',
@@ -68,7 +100,7 @@ export default {
 
     },
     components: {
-        Pag,Alert
+        Pag,Build
     },
     data () {
         return {
@@ -143,10 +175,26 @@ export default {
         padding-left:24px;padding-right: 16px;height: 600px;
         border: 1px solid #ddd;border-top:none;
     }
+
+    .body2{
+        padding-left: 24px;padding-right: 16px;
+        height:320px;  border: 1px solid #ddd;border-top: none;
+    }
+    .con2{
+        height: 59px;
+        line-height: 59px;
+        border-bottom: 1px solid #ddd;
+        ul{display: block}
+        li{float: left;display: block}
+        margin-top: 5px;
+    }
+    .con2:nth-last-child(1){
+        border: none;
+    }
     .items{
         font-size: 14px;color: #666;
         border-bottom: 1px solid #ddd;
-        ul{display: block};li{display: block;float: left}
+        ul{display: block};li{display: block;float: left;}
 
         .list1{font-size: 16px;color:#333}
     }

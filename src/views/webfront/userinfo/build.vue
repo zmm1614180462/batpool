@@ -1,118 +1,108 @@
-
+// 新建子账号
 <template>
     <transition name='fade'>
-        <div class="wrap" v-if="currentAlert">
+        <div class="wrap" v-if="showApi">
             <!-- 绑定更多 -->
-            <div v-show="false"  class="content">
+            <div v-if="currentApi=='new'"  class="content">
                 <div class="title">
                     <div class="close clearfix">
-                        <div  style="float: right;width: 20px;height:20px;margin: 12px;cursor: pointer" @click="CloseAlert">X</div>
+                        <div  style="float: right;width: 20px;height:20px;margin: 12px;cursor: pointer" @click="CloseAlert({type:'showApi'})">X</div>
                     </div>
-                    <div style="text-align: center;font-size: 18px;color: #333;margin-bottom: 42px">绑定更多</div>
+                    <div style="text-align: center;font-size: 18px;color: #333;margin-bottom: 42px">新建子账号</div>
                 </div>
                 <!-- 选择币种 -->
                 <div class="kinds clearfix">
-                    <div style="float:left;margin-left:152px;margin-right:7px;line-height:30px;">选择币种：</div>
+                    <div style="float:left;margin-left:139px;margin-right:7px;line-height:30px;">昵称：</div>
                     <div style="float:left">
-                        <Select  placeholder="请输入..." style="width: 220px;">
-                            <Option v-for="item in kinds" :value="item.id" :key="item.name">{{ item.name }}</Option>
-                        </Select>
+                       <Input  placeholder="" style="width: 220px"></Input>
                     </div>
                 </div>
 
-                   <div class="kinds clearfix">
-                    <div style="float:left;margin-left:152px;margin-right:7px;line-height:30px;">输入地址：</div>
+                 <div class="kinds clearfix">
+                    <div style="float:left;margin-left:125px;margin-right:7px;line-height:30px;">用户名：</div>
                     <div style="float:left">
-                       <Input v-model="value" placeholder="请输入..." style="width: 220px"></Input>
+                       <Input  placeholder="首字母开头至多8位字符" style="width: 220px"></Input>
                     </div>
+                 </div> 
 
-                    
+                <div class="kinds clearfix">
+                    <div style="float:left;margin-left:111px;margin-right:7px;line-height:30px;">登录密码：</div>
+                    <div style="float:left">
+                       <Input  placeholder="6-32位字符" style="width: 220px"></Input>
+                    </div>    
                 </div>
 
-                <div class="more clearfix"> <span style="float:left;display:block;margin-left:15px;">添加地址即可使用完整功能</span> <span style="color:#1C95D4;float:right;display:block;margin-right:15px;cursor:pointer">查看更多</span></div>
+                  <div class="kinds clearfix">
+                    <div style="float:left;margin-left:111px;margin-right:7px;line-height:30px;">确认密码：</div>
+                    <div style="float:left">
+                       <Input  placeholder="和上面保持一致" style="width: 220px"></Input>
+                    </div>    
+                </div>
 
-                <div class="submit">确定绑定</div>
+                <div style="position:relative;width:402px;height:78px;border:1px solid #ddd;padding:5px;margin:0 auto;color:#666;line-height:26px;">
+                   多用于矿场多客户区分管理，我们建议为托管客户开通子账户以方便监控和结算。 
+                   <a style="display:block;position:absolute;bottom:0;right:5px;color:#1C95D4;" >
+                        查看更多
+                       </a>    
+                </div>
+
+
+                <div class="submit">确定</div>
 
               
             </div>
 
-            <!-- 修改 -->
 
-             <div v-show="false"  class="content">
+            <div v-if="currentApi=='api'"  class="content">
                 <div class="title">
                     <div class="close clearfix">
-                        <div  style="float: right;width: 20px;height:20px;margin: 12px;cursor: pointer" @click="CloseAlert">X</div>
+                        <div  style="float: right;width: 20px;height:20px;margin: 12px;cursor: pointer" @click="CloseApi()">X</div>
                     </div>
-                    <div style="text-align: center;font-size: 18px;color: #333;margin-bottom: 42px">修改收款地址</div>
+                    <div style="text-align: center;font-size: 18px;color: #333;margin-bottom: 42px">API</div>
                 </div>
                 <!-- 选择币种 -->
                 <div class="kinds clearfix">
-                    <div style="float:left;margin-left:152px;margin-right:7px;line-height:30px;">选择币种：1U67GYF7gtiuHG6897uTfrd5RRyUYIUYGfr4t</div>
-                </div>
-
-                   <div class="kinds clearfix">
-                    <div style="float:left;margin-left:180px;margin-right:7px;line-height:30px;">标签：</div>
+                    <div style="float:left;margin-left:35px;margin-right:7px;line-height:30px;">AccessKey：</div>
                     <div style="float:left">
-                       <Input placeholder="输入备注地址，以方便识别" style="width: 300px"></Input>
+                       <Input  value="0MH72tgIBGYUT756f87gBUi8huy87tF6yg8uhiOIH8" style="width: 400px"></Input>
                     </div>
-
-                    
                 </div>
 
-                <div class="kinds clearfix"> <span style="float:left;display:block;margin-left:138px;margin-right:7px">新付款地址：</span> 
-                <span style="color:#1C95D4;float:left;display:block;cursor:pointer">
-                    <Input  style="width: 300px"></Input>
-                    
-                    </span></div>
+                 <div class="kinds clearfix">
+                    <div style="float:left;margin-left:125px;margin-right:7px;line-height:30px;">用户名：</div>
+                    <div style="float:left">
+                       <Input  placeholder="首字母开头至多8位字符" style="width: 220px"></Input>
+                    </div>
+                 </div> 
 
-                <div class="submit">下一步</div>
+                <div class="kinds clearfix">
+                    <div style="float:left;margin-left:111px;margin-right:7px;line-height:30px;">登录密码：</div>
+                    <div style="float:left">
+                       <Input  placeholder="6-32位字符" style="width: 220px"></Input>
+                    </div>    
+                </div>
+
+                  <div class="kinds clearfix">
+                    <div style="float:left;margin-left:111px;margin-right:7px;line-height:30px;">确认密码：</div>
+                    <div style="float:left">
+                       <Input  placeholder="和上面保持一致" style="width: 220px"></Input>
+                    </div>    
+                </div>
+
+                <div style="position:relative;width:402px;height:78px;border:1px solid #ddd;padding:5px;margin:0 auto;color:#666;line-height:26px;">
+                   多用于矿场多客户区分管理，我们建议为托管客户开通子账户以方便监控和结算。 
+                   <a style="display:block;position:absolute;bottom:0;right:5px;color:#1C95D4;" >
+                        查看更多
+                       </a>    
+                </div>
+
+
+                <div class="submit">确定</div>
 
               
             </div>
 
-            <!-- 修改收款地址 -->
-             <div v-show="true"  class="content">
-                <div class="title">
-                    <div class="close clearfix">
-                        <div  style="float: right;width: 20px;height:20px;margin: 12px;cursor: pointer" @click="CloseAlert">X</div>
-                    </div>
-                    <div style="text-align: center;font-size: 18px;color: #333;margin-bottom: 42px">修改收款地址</div>
-                </div>
-                <!-- 选择币种 -->
-                <div class="kinds clearfix">
-                    <div style="float:left;margin-left:152px;margin-right:7px;line-height:30px;">安全凭证：</div>
-                    <div style="float:left">
-                        <Select  placeholder="请输入..." style="width: 220px;">
-                            <Option v-for="item in type" :value="item.id" :key="item.name">{{ item.name }}</Option>
-                        </Select>
-                    </div>
-                </div>
-
-                   <div style="height:40px" class="kinds clearfix">
-                    <div style="float:left;margin-left:110px;margin-right:7px;line-height:40px;">当前绑定手机号：</div>
-                    <div style="float:left" class="clearfix">
-                        <div style="float:left;line-height:40px;">
-                            123****1234
-                        </div>
-                        <!--  -->
-                       <div @click="sendCode()"  :class="{click:disabled}"  style="float:left;margin-left:43px;" class="send">
-                           {{time}}
-                       </div>
-                    </div>
-
-                    
-                </div>
-
-                <div  class="kinds clearfix"> <span style="float:left;display:block;margin-left:166px;line-height:30px;margin-right:7px">验证码：</span> 
-                <span style="color:#1C95D4;float:left;display:block;cursor:pointer">
-                    <Input  style="width: 220px"></Input>
-                    
-                    </span></div>
-
-                <div class="submit">确定修改</div>
-
-              
-            </div>
+        
 
         </div>
 
@@ -131,7 +121,7 @@ export default {
       Input,Select,CountDown
   },
   computed:{
-      ...mapGetters(['currentAlert'])
+      ...mapGetters(['showApi','currentApi'])
   },
 
   created:function () {
@@ -166,7 +156,7 @@ export default {
     }
   },
   methods: {
-      ...mapMutations(['CloseAlert']),
+      ...mapMutations(['CloseApi']),
       remove(id){
           var a = [1,2,3,4];
           var _this = this;
@@ -233,9 +223,9 @@ export default {
      position: relative;
      width: 600px;
      margin: 0 auto;
-     height: 400px;
      background: #fff;
      margin-top:10%;
+     padding-bottom: 30px;
  }
  .condition{
      margin-left: 24px;
@@ -301,7 +291,7 @@ export default {
     font-size: 16px;color: #fff;
 line-height: 50px;text-align: center;
 background: #1C95D4;
-margin-top: 50px}
+margin-top: 26px;}
 
 // 发送验证码按钮
 .send{
