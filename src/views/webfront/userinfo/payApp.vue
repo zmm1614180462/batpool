@@ -93,7 +93,6 @@ export default {
                 'type':'get',
                 success(data){
                     _this.itemDate=data;
-                    console.log(data)
                 }
             });
             if(this.limit==0){

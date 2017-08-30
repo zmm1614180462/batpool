@@ -79,7 +79,6 @@ export default {
       let limit = this.limit;
   },
     computed:{
-
         totalPage(){ //总页数
             var _this = this;
             Lib.M.ajax({

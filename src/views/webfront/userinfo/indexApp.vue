@@ -41,17 +41,17 @@ import Foot from 'components/Foot'
 
 
 export default {
+  name:'index',  
   created(){
-      var url = this.$route.path
-      this.$store.commit('changeUrl',{url:url});
-      this.atcList = this.$route.path;
+          var _this = this;  
+          this.$store.commit('changeUrl',{url:_this.$route.path});
   },
   data() {
 
     return {
 
-      list:[{name:'我的账户',url:'/'},{name:'子账户管理',url:'/count'},{name:'收款记录',url:'/log'},
-          {name:'矿机日志',url:'/pay'},{name:'账户设置',url:'/'},{name:'消息盒子',url:'/'}],
+      list:[{name:'我的账户',url:'/'},{name:'子账户管理',url:'/count'},{name:'收款记录',url:'/pay'},
+          {name:'矿机日志',url:'/log'},{name:'账户设置',url:'/account'},{name:'消息盒子',url:'/message'}],
     }
   },
    computed:{
@@ -71,12 +71,11 @@ export default {
   },
   //实例初始化最之前，无法获取到data里的数据
   beforeCreate(){
-  	
-  	
+
   },  
   //在挂载开始之前被调用
   beforeMount(){
-  	
+ 
   
   }, 
   //已成功挂载，相当ready()

@@ -62,47 +62,68 @@
                 </div>
                 <!-- 选择币种 -->
                 <div class="kinds clearfix">
-                    <div style="float:left;margin-left:35px;margin-right:7px;line-height:30px;">AccessKey：</div>
+                    <div style="float:left;margin-left:35px;margin-right:7px;line-height:40px;">AccessKey：</div>
                     <div style="float:left">
-                       <Input  value="0MH72tgIBGYUT756f87gBUi8huy87tF6yg8uhiOIH8" style="width: 400px"></Input>
+                       <input id="access"  value="0MH72tgIBGYUT756f87gBUi8huy87tF6yg8uhiOIH8" style="width: 400px"></input>
                     </div>
+                    <div @click="copy('0MH72tgIBGYUT756f87gBUi8huy87tF6yg8uhiOIH8','access')" style="float:left;margin-left:15px;line-height:40px;cursor:pointer;">复制</div>
                 </div>
 
                  <div class="kinds clearfix">
-                    <div style="float:left;margin-left:125px;margin-right:7px;line-height:30px;">用户名：</div>
+                    <div style="float:left;margin-left:77px;margin-right:7px;line-height:40px;">puid：</div>
                     <div style="float:left">
-                       <Input  placeholder="首字母开头至多8位字符" style="width: 220px"></Input>
+                       <input id="puid" value="26548"   style="width: 220px"></input>
                     </div>
+                    <div @click="copy('26548','puid')" style="float:left;margin-left:15px;line-height:40px;cursor:pointer;">复制</div>
                  </div> 
 
-                <div class="kinds clearfix">
-                    <div style="float:left;margin-left:111px;margin-right:7px;line-height:30px;">登录密码：</div>
-                    <div style="float:left">
-                       <Input  placeholder="6-32位字符" style="width: 220px"></Input>
-                    </div>    
-                </div>
+            
 
-                  <div class="kinds clearfix">
-                    <div style="float:left;margin-left:111px;margin-right:7px;line-height:30px;">确认密码：</div>
-                    <div style="float:left">
-                       <Input  placeholder="和上面保持一致" style="width: 220px"></Input>
-                    </div>    
-                </div>
-
-                <div style="position:relative;width:402px;height:78px;border:1px solid #ddd;padding:5px;margin:0 auto;color:#666;line-height:26px;">
-                   多用于矿场多客户区分管理，我们建议为托管客户开通子账户以方便监控和结算。 
-                   <a style="display:block;position:absolute;bottom:0;right:5px;color:#1C95D4;" >
-                        查看更多
-                       </a>    
+                <div style="width:298px;height:48px;border:1px solid #ddd;line-height:50px;color:#666;margin-left:125px;padding-left:15px;border-radius:4px;">
+                   如果您不知道如何使用，请查阅 <a href="" style="color: #1879BE;">API文档</a>
                 </div>
 
 
-                <div class="submit">确定</div>
+                <div class="submit">完成</div>
 
               
             </div>
 
         
+            <div v-if="currentApi=='share'" class="content">
+
+                <div class="title">
+                    <div class="close clearfix">
+                        <div  style="float: right;width: 20px;height:20px;margin: 12px;cursor: pointer" @click="CloseApi()">X</div>
+                    </div>
+                    <div style="text-align: center;font-size: 18px;color: #333;margin-bottom: 42px">分享</div>
+                </div>
+                <!-- 分享 -->
+                <div class="kinds clearfix">
+                    <div style="float:left;margin-left:35px;margin-right:7px;line-height:40px;">链接地址：</div>
+                    <div style="float:left">
+                       <input id="access"  value="0MH72tgIBGYUT756f87gBUi8huy87tF6yg8uhiOIH8" style="width: 400px"></input>
+                    </div>
+                    <div @click="copy('0MH72tgIBGYUT756f87gBUi8huy87tF6yg8uhiOIH8','access')" style="float:left;margin-left:15px;line-height:40px;cursor:pointer;">复制</div>
+                </div>
+
+                 <div class="kinds clearfix">
+                    <div style="float:left;margin-left:77px;margin-right:7px;line-height:40px;">密码：</div>
+                    <div style="float:left">
+                       <input placeholder="可为空" id="puid" value="26548"   style="width: 220px"></input>
+                    </div>
+                    <div @click="copy('26548','puid')" style="float:left;margin-left:15px;line-height:40px;cursor:pointer;">复制</div>
+                 </div> 
+
+            
+
+                <div style="width:298px;height:48px;border:1px solid #ddd;line-height:50px;color:#666;margin-left:125px;padding-left:15px;border-radius:4px;">
+                   如果您不知道如何使用，请查阅 <a href="" style="color: #1879BE;">API文档</a>
+                </div>
+
+
+                <div class="submit">完成</div>
+            </div>
 
         </div>
 
@@ -194,8 +215,13 @@ export default {
          
         
         
-      }  
-
+      },  
+    //copy 复制到粘贴板
+    copy(value,dom){
+        // dom 对象必须是 input   area
+        document.querySelector('#'+dom).select();
+        document.execCommand("copy");
+    }  
   }
 }
 </script>
@@ -203,6 +229,9 @@ export default {
 <style lang="less" scoped>
  @blue1 : #D0E9F7; //弹出款下划线颜色
  @blue2 : #1C95D4; //所有按钮颜色
+ input{
+     border: 1px solid #ddd;width: 398px;height: 38px; border-radius: 4px;padding-left: 15px;
+ }
  .in{
      width: 100px;
      height: 200px;

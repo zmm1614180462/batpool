@@ -6,7 +6,11 @@
 <!--矿机日志-->
 
      <div class="t1">
-         <div style="height: 60px;padding-left:33px;background: #D0E9F7;font-size: 16px;line-height: 60px;color: #333">预警日志</div>
+         <div style="height: 60px;padding-left:33px;background: #D0E9F7;font-size: 16px;line-height: 60px;color: #333">
+             <ul style="">
+                 <li style="margin-right:91px;">币种</li><li style="margin-right:233px;">时间</li><li>消息</li>
+             </ul>
+         </div>
          <div class="condition">
 
              <div v-if="auth==0">
@@ -20,8 +24,11 @@
              <div v-if="auth==1">
                  <div class="login-t clearfix" v-for="item in itemDate">
                      <div class="log clearfix" style="">
-                         <div style="float:left">{{item.name}}</div>
-                         <div style="float:right">{{item.date}}</div>
+                         <div style="float:left;width:120px;">
+                             <div style="width:30px;height:30px;background:#d8d8d8;border-radius:50%;margin-top:15px;"></div>
+                         </div>
+                         <div style="float:left;width:264px;">2017/07/26  09:32:42</div>
+                         <div style="float:left;">amoukyo.004 矿机上线，当前矿机状态为：20 / 33 台，当前实时算力：92.21 TH/s</div>
                      </div>
                      <!--<ul class="clearfix" style="display: block">-->
                          <!--<li style="width: 112px" >{{ item.name }}</li>-->
@@ -72,9 +79,6 @@ import Pag from 'components/pagination'
 
 export default {
   name: 'log',
-    beforeMount(){
-
-    },
     beforeRouteEnter(to,from,next){
         Lib.M.ajax({
             'url':'http://localhost:3000/people/?_page=1&_limit=6',
@@ -82,12 +86,11 @@ export default {
             success(data){
                 next(vm=>{vm.itemDate=data})
 //                _this.itemDate=data;
-//                console.log(data)
+
             }
         });
     },
     created(){
-      console.log(document.documentElement.clientWidth,document.body.clientWidth)
       this.allDate = 100;
       let _this = this;
       let limit = this.limit;
@@ -101,7 +104,6 @@ export default {
                 'type':'get',
                 success(data){
                     _this.itemDate=data;
-                    console.log(data)
                 }
             });
             if(this.limit==0){
@@ -168,6 +170,10 @@ export default {
     input[type="number"]{
         -moz-appearance: textfield;
     }
+.t1{
+    ul{display: block;}
+    li{float: left;display: block;}
+}    
 .ys{
     margin-left: 2px;
     margin-right: 2px;
