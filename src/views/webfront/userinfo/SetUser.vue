@@ -50,22 +50,12 @@
      <div class="clearfix" style="margin-bottom: 37px;font-size: 18px;margin-left:2px;">
          <div style="float:left;">联系人列表</div> <div style="float:right;color:#1879BE;cursor:pointer;">新建联系人</div>
      </div>
-
      <div class="list clearfix">
          <div v-for="list in 5" class="list-con">
-             <div v-show="true">
-                 <div class="head">
-                      <p>王小明</p>
-                      <p>矿场员工</p>
-                      <p>手机：+86 15215632541</p>
-                      <p>邮箱：15215632541@qq.com</p>
-                 </div>
-                 <div class="foot clearfix">
-                     <div class="f-left">已设置登录</div>
-                     <div class="f-dot"></div>
-                 </div>
-                
-             </div>
+             <div style="float:left;">
+             <list></list>
+            </div>
+             <!-- hover 事件  -->
          </div>
      </div>
      
@@ -82,7 +72,7 @@ import Pag from 'components/pagination'
 
 import Alert from './alert.vue'
 import {mapMutations} from 'vuex'
-require('./qq-oc.png');
+import List from './list.vue'
 export default {
   name: 'account',
     beforeMount(){
@@ -115,10 +105,11 @@ export default {
 
     },
   components: {
-      Pag,Alert
+      Pag,Alert,List
   },
   data () {
     return {
+        show:true,
         img:[require('./qq-oc.png')],
         url:'', //要请求的url链接
         itemDate:[], //联系人信息
@@ -156,6 +147,7 @@ export default {
 
 <style lang="less" scoped>
 .clearfix:after{
+    
     content: '';
     height:0;//高度为0
     line-height:0;//行高为0
@@ -182,14 +174,8 @@ export default {
 .list{
   width: 1240px;
 }
-.list-con{
-    float: left;
-    width: 289px;
-    height: 298px;
-    border: 1px solid #ddd;
-    margin-right: 20px;
-    margin-bottom: 20px;
 
-}
+
+
 
 </style>
