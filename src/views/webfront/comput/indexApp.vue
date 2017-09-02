@@ -43,6 +43,7 @@ import Foot from 'components/Foot'
 export default {
   created(){
       this.atcList = this.$route.path;
+      console.log(this.$route.path)
   },
   data() {
 

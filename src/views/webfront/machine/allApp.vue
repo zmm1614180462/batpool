@@ -2,6 +2,7 @@
 <template>
  <div >
      <!--预留echart位置-->
+     <alert></alert>
      <div style="height: 428px;margin-bottom: 20px;background: red" class="echart"></div>
 
      <div>
@@ -144,11 +145,12 @@
 
 import Lib from 'assets/js/Lib';
 import Foot from 'components/Foot'
+import Alert from './alert.vue'
 
 export default {
   name: 'all',
   components: {
-      Foot
+      Foot,Alert
   },
   created:function () {
       this.$store.commit('changeUrl',{url:'/'});
