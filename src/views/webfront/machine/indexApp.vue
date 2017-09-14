@@ -4,12 +4,16 @@
 
    <div class="wrap clearfix" >
       <!--选项卡  可以做成组件-->
-      <div class="nav-t">
-         <ul>
+      <div class="nav-t clearfix">
+         <ul style="float:left;">
             <li v-for="item in list">
+            
                <a @click="changeTab(item.name,item.url)" :class="{act:currentUrl==item.url}"  >{{ item.name }}</a>
             </li>
          </ul>
+         <div style="float:right;">
+             
+         </div>
       </div>
       <!--预览窗口-->
       <div>
@@ -38,22 +42,19 @@ import Foot from 'components/Foot'
 
 
 
-
-
 export default {
   created(){
-      this.atcList = this.$route.path;
+      this.currentUrl = this.$route.path;
   },
   data() {
 
     return {
 
       list:[{name:'总览',url:'/'},{name:'预警设置',url:'/warn'},{name:'矿机日志',url:'/log'},{name:'付款记录',url:'/pay'}],
+      currentUrl :'',
     }
   },
    computed:{
-
-       ...mapGetters(['currentUrl']),
       phone:{
           get(){
               return this.$store.state.formdata.phone
@@ -85,7 +86,7 @@ export default {
   //相关操作事件
   methods: {
       changeTab(name,url){
-          this.$store.commit('changeUrl',{url:url});
+          this.currentUrl = url;
           this.$router.push({path:url})
       },
       resetPass(){
@@ -96,7 +97,7 @@ export default {
               url:'http://www.cnblogs.com/jiangxiaobo/p/5425025.html',
               data:{value},
               success:function (data) {
-                  console.log(data)
+            
               }
           })
       }

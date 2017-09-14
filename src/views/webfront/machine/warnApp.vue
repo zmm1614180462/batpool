@@ -1,6 +1,6 @@
-
 <template>
  <div>
+     
 	 <div class="t1" style="margin-bottom: 40px;position: relative">
          <div style="height: 60px;padding-left:33px;background: #D0E9F7;font-size: 16px;line-height: 60px;color: #333">触发条件列表</div>
          <div class="condition">
@@ -88,10 +88,7 @@
 
 
                  </div>
-
                  <!--每页显示多少条数据-->
-
-
              </div>
          </div>
      </div>
@@ -101,35 +98,37 @@
 <script>
 
 import Lib from 'assets/js/Lib';
-
+// 添加加载动画
+import {Spin} from 'iview'
 import Pag from 'components/pagination'
+
 
 
 export default {
   name: 'warn',
     beforeMount(){
-
     },
-
-        created(){
-//      初始化数据
-        this.$store.commit('changeUrl',{url:'/warn'});
-      console.log(document.documentElement.clientWidth,document.body.clientWidth)
+    watch:{
+        '$route'(to,from){
+            this.allDate = 100;//总数据条数
+            this.limit=6 ;//每页显示数据条数
+            this.auth =1;
+            this.page=1;//当前页数
+            this.goPage({page:1}) //每次更新跳转
+        }
+    },
+    created(){
       this.allDate = 100;
-      let _this = this;
-      let limit = this.limit;
+      
     },
     computed:{
-
         totalPage(){ //总页数
             var _this = this;
-
             Lib.M.ajax({
                 'url':'http://localhost:3000/people/?_page=1&_limit='+_this.limit,
                 'type':'get',
                 success(data){
                     _this.itemDate=data;
-                    console.log(data)
                 }
             });
             if(this.limit==0){
@@ -143,7 +142,7 @@ export default {
 
     },
   components: {
-      Pag,
+      Pag,Spin
   },
   data () {
     return {

@@ -10,21 +10,27 @@
             <myinput :attr="username"></myinput>
          </div>
 
-         <div class="password" style="width:280px;margin: 0 auto ;margin-bottom: 33px">
+         <div class="password" style="width:280px;margin: 0 auto ;margin-bottom: 50px">
             <myinput :attr="password"></myinput>
          </div>
 
+         
+
          <!--人机交互-->
 
-         <div style="width: 280px;margin: 0 auto;height: 72px;margin-bottom: 48px" class=""></div>
+         <div style="width: 300px;margin: 0 auto;margin-bottom: 48px;margin-left:55px;" class="">
+           <div style="text-align:center" v-show="show">正在加载验证码</div>
+           <div v-show="!show" style="margin:0 auto;" id="captcha"></div>
+         </div>
 
          <!--人机验证待定-->
 
-         <div class="logo-btn">登录</div>
+         <div @click="login" class="logo-btn">登录</div>
 
          <div class="forget">
             <a href="">忘记密码 ?</a>
             <a href="">注册账号</a>
+            
          </div>
          <div style="width: 280px;margin: 0 auto;margin-top: 42px;font-size: 14px;color: #666!important;margin-bottom: 12px">
             <divider>快捷登录</divider>
@@ -52,14 +58,32 @@ import {mapState,mapGetters,mapActions,mapMutations} from 'vuex'
 import css from 'assets/css/common.css'
 import logo from 'assets/image/username.png'
 import logo1 from 'assets/image/password.png'
-
+import {setStore} from 'assets/js/mUtils'
+import {validate_code} from 'assets/js/mUtils'
 
 export default {
+  created(){
+  },
+  mounted(){
+    var _this = this;
+    // 发送验证码
+    
+   validate_code(function(captchaObj){
+                captchaObj.appendTo('#captcha');
+                captchaObj.onReady(function () {
+                _this.show = false;
+                _this.validate = captchaObj.getValidate();
+               });
+               
+            }); 
+  },
     computed:mapGetters(['count']),
   data() {
     return {
       username:{name:'username',type:'text',placeholder:'用户名',url:logo},
       password:{name:'password',type:'password',placeholder:'密码',url:logo1},
+      show:true,
+      validate:{},
     }
   },
    computed:{
@@ -68,25 +92,20 @@ export default {
   components: {
 	Navbar,Myinput,Divider
   },
-  //实例初始化最之前，无法获取到data里的数据
-  beforeCreate(){
-  	
-  	
-  },  
-  //在挂载开始之前被调用
-  beforeMount(){
-  	
-  
-  }, 
-  //已成功挂载，相当ready()
-  mounted(){
-  
-  
-	
-  },
   //相关操作事件
   methods: {
-
+    login(){
+      // 在后台登录成功后写入本地存储
+      setStore('login',{username:'张三'});
+      if(document.querySelector("[name=geetest_challenge]")&&document.querySelector("[name=geetest_validate]")&&document.querySelector("[name=geetest_seccode]")){
+       var 
+       geetest_challenge= document.querySelector("[name=geetest_challenge]").value;
+       var geetest_validate = document.querySelector("[name=geetest_validate]").value;
+       var geetest_seccode  = document.querySelector("[name=geetest_seccode]").value;
+      }
+      // 获取验证码的值
+    
+    }
       
   }
 }

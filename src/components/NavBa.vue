@@ -16,11 +16,19 @@
          </ul>
      </div>
 
-     <div class="login">
-         <img style="float:left;margin-top: 14px;margin-right: 5px" src="../assets/image/头像.png" alt="">
-         <div class="lo-name">
+     <div class="login clearfix">
+         <div class="clearfix userinfo" style="">
+             <img style="float:left;margin-top: 7px;margin-right: 5px" src="../assets/image/头像.png" alt="">
+             <div style="float:left;"class="lo-name clearfix">
+             <div @click="down" style="float:left;">{{username}}</div>
+                <div class="" style="float:right;height:60px;width:30px;">
+                <div class="down-icon" style="margin-top:17px;margin-left:5px;"></div>
+                </div>
+            </div>
 
+            
          </div>
+       
 
          <div class="news">
              <img src="../assets/image/信息.png" alt="">
@@ -34,49 +42,48 @@
 
 import Lib from 'assets/js/Lib';
 import headcoin from 'assets/image/头像.png'
-
+import {getStore} from 'assets/js/mUtils'
 
 
 export default {
+  created(){
+      this.username = JSON.parse(getStore('login')).username;
+      console.log(this.username);
+  },  
   data() {
     return {
         activeName:'zh',
         meau:['算力面板','矿机列表','统计','下载','帮助'],
+        username:'',
     }
   },
   components: {
   },
   props:['activeMeau'],
-  //实例初始化最之前，无法获取到data里的数据
-  beforeCreate(){
-  	
-  	
-  },  
-  //在挂载开始之前被调用
-  beforeMount(){
-  	
-  
-  }, 
-  //已成功挂载，相当ready()
-  mounted(){
-  
-  
-	
-  },
   //相关操作事件
   methods: {
 	
 	toggle:function (val) {
         this.activeName = val;
-    }
-	
-      
+    },
+    down(){
+
+    },  
   }
 }
 </script>
 
 <style lang="less" scoped>
     @import "../assets/css/color";
+
+    .clearfix:after{
+        content: '';
+        height:0;//高度为0
+        line-height:0;//行高为0
+        display:block;//将文本转为块级元素
+        visibility:hidden;//将元素隐藏
+        clear:both//清除浮动
+    }
     .wrap{
         height: 60px;
         width: 1220px;
@@ -151,7 +158,6 @@ export default {
                     display: block;
                     margin-left: 44px;
                 }
-
             }
             li:nth-child(1){
                 a{
@@ -175,8 +181,7 @@ export default {
     }
 
     .login{
-        width: 1220px - 1052;
-
+        width: 190px;
         font-size: 14px;
         float: right;
         height: 60px;
@@ -212,4 +217,16 @@ clear:both;
 height:50px;
 }
 
+.down-icon{
+    background: url('../assets/image/spritesheet.png');
+    background-repeat: no-repeat;
+    width: 18px;
+    height: 10px;
+    background-position: -91px -5px;
+}
+.userinfo{
+    float:left;margin-top:7px;border:1px solid #ddd;height:52px;line-height:52px;
+    border-bottom: none;
+    padding-left: 5px;
+}
 </style>

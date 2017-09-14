@@ -40,34 +40,70 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />    
     <title>transition向上展开</title>    <meta name="generator" content="" /> 
        <style type="text/css">       
-        .div-test-up {        
-                     
-                 display: flex;         
-                    align-items: flex-start;      
-                  }     
-        .span-test {           
-                           
-            font-size: 12px;      
-                                 
-            display: block;         
-                                    
-            height: 27px;          
-                                       
-            width: 27px;        
-                                          
-            transition: height 1s;          
-                                             
-            background-color: rebeccapurple;        }      
-                                                   
-            .span-test:hover {         
-                                                              height: 200px;            }    
-                                                              </style></head><body> 
+      .test{margin:0;padding:0;list-style:none;border:1px solid #000;}  
+.test li{height:50px;background:#fff;text-align:center;}  
+.test li a{  
+    border:3px solid #666;  
+    border-width:3px 0 0 3px;  
+    display:inline-block;  
+    height:8px;  
+    -moz-transform-origin:center center;  
+    -moz-transform:rotate(45deg);  
+    -moz-transition:all .5s ease-in .1s;  
+    -webkit-transform-origin:center center;  
+    -webkit-transform:rotate(45deg);  
+    -webkit-transition:all .5s ease-in .1s;  
+    -o-transform-origin:center center;  
+    -o-transform:rotate(45deg);  
+    -o-transition:all .5s ease-in .1s;  
+    -ms-transform-origin:center center;  
+    -ms-transform:rotate(45deg);  
+    -ms-transition:all .5s ease-in .1s;  
+    transform-origin:center center;  
+    transform:rotate(45deg);  
+    transition:all .5s ease-in .1s;  
+    width:8px;}  
+.test li a:hover{  
+    -moz-transform:rotate(-15deg);  
+    -moz-transition:all .5s ease-in .1s;  
+    -webkit-transform:rotate(225deg);  
+    -webkit-transition:all .5s ease-in .1s;  
+    -o-transform:rotate(-45deg);  
+    -o-transition:all .5s ease-in .1s;  
+    -ms-transform:rotate(-45deg);  
+    -ms-transition:all .5s ease-in .1s;  
+    transform:rotate(-45deg);  
+    transition:all .5s ease-in .1s;  
+}  
+        </style></head>
+<body> 
                                                                   
                                                                   
-                                                                  
-                                                                  <div class="div-test-up">      
-                                                                      
-                                                                    
-                                                                    <span class="span-test">向上</span>   
+</body>
                                                                 
-                                                                </div></body></html>
+<ul class="test">  
+    <li><a href="#"></a></li>  
+    <li><a href="#"></a></li>  
+    <li><a href="#"></a></li>  
+    <li><a href="#"></a></li>  
+    <li><a href="#"></a></li>  
+    <li><a href="#"></a></li>  
+</ul>                                                          
+ <script>
+ var data  = {"robot_id":"22e3f139-8592-11e7-ba8b-7cd30ab71dd0", "table_name" : "user_action", "table_content": [{"cmd":"add", "fields": {"user_id": "1111","item_id": "6033654", "item_type": 1,"action_type": "play","created_time": 1503714136}}]};
+ data = JSON.stringify(data);
+ $.ajax({
+     url:'http://localhost:3000/people/',
+     dataType:'json',
+     data:data,
+     success:function(data){
+         console.log(data);
+     },
+     error:function(error){
+        console.log(error);
+     }
+
+ })
+ 
+ </script>                                                               
+</html>

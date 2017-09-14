@@ -5,26 +5,34 @@ import App from './indexApp';
 import store from './store.js';
 
 //添加vue router
-import All from './allApp.vue';
+import Index from './indexApp'
 import Warn from './warnApp.vue';
 import VueRouter from 'vue-router';
-import Log from './Log.vue';
-import Pay from './payApp.vue';
 const routes = [
-    { path: '/', component: All },
-    { path: '/warn', component: Warn },
-    { path:'/log',component: Log },
-    { path:'/pay',component:Pay}
-];
+    {
+        path:'/',component:Index,
+        children:[
+                { path: '', component:Warn },
+                { path:'/:userid',  component:Warn } 
+        ]
+},
+   
+]
 
 Vue.use(VueRouter)
 
 const router = new VueRouter({
     routes:routes
 });
-
+router.beforeEach((to, from, next) => {
+ 
+    if (to.matched.length ===0) {                                        //如果未匹配到路由
+        from.name ? next({ name:from.name }) : next('/all');
+    }else{
+        next();
+    }
+})
 new Vue({
     store,
     router: router,
-  render: h => h(App)
-}).$mount('#app');
+}).$mount('#app')

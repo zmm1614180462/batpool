@@ -1,3 +1,4 @@
+<script src="details.js"></script>
 <template>
   <div>
   <hb-head headfont="首页首页"></hb-head>

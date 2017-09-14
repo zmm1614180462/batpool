@@ -1,8 +1,8 @@
 <template>
-<div class="body">
+<div class="body " style="">
    <navb activeMeau="首页"></navb>
 
-   <div class="wrap clearfix" >
+   <div class="wrap clearfix" style="" >
       <!--选项卡  可以做成组件-->
       <div class="nav-t">
          <ul>
@@ -12,12 +12,12 @@
          </ul>
       </div>
       <!--预览窗口-->
-      <div>
+      <div style="min-height:500px;">
          <router-view></router-view>
       </div>
    </div>
 
-   <div style="margin-top: 80px"> <foot></foot></div>
+   <div style="margin-top: 80px;"> <foot></foot></div>
    <!--<Page :current="1" :total="100"></Page>-->
 
 

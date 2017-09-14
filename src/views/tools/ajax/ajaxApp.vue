@@ -51,24 +51,22 @@ export default {
 			
 			var self = this;
 			
-			this.$vux.loading.show({
- 					text: 'Loading'
-			});
+			// this.$vux.loading.show({
+ 			// 		text: 'Loading'
+			// });
 			
-			Lib.M.ajax({
+			var a = Lib.M.ajax({
 				'url':'http://ltc.tbdice.org/js/json.php/livedata.json?rand=0.5202020538178679',
 				'success':function (data){
 					console.log(data);
 					self.ajaxResult = data;
 					
 					setTimeout(()=>{
-						self.$vux.loading.hide();
+						// self.$vux.loading.hide();
 					},1000);
 					
 				}
-			});
-			
-			
+			});			
 		}
 		
   }

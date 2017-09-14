@@ -5,9 +5,10 @@
       <x-switch title="显示" v-model="show2"></x-switch>
     </group>
     <div>
-      <alert v-model="show2" title="温馨提示" content="这里是内容了"></alert>
+      <alert v-model="show2" title="温馨提示" content="这里是内容了">
+        <div style="width: 100px;height: 100px;background: red"></div>
+      </alert>
     </div>
-
     <group title="插件">
       <cell title="显示" @click.native="showPlugin" is-link></cell>
       <cell title="3S后关闭" @click.native="showPluginAuto" is-link></cell>

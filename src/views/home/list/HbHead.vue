@@ -46,6 +46,7 @@ export default {
         color:red;
         padding:10px;
         font-size:12px;
+
     }
 
 .headfix{

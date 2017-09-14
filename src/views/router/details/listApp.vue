@@ -23,6 +23,9 @@ export default {
   components: {
     HbHead,XButton
   },
+  created(){
+    console.log(this.$route.path)
+  },
   data () {
     return {
       

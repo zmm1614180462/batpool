@@ -38,13 +38,12 @@ var Rxports = {
 			},
 			// `baseURL` 将自动加在 `url` 前面，除非 `url` 是一个绝对 URL。
   			// 它可以通过设置一个 `baseURL` 便于为 axios 实例的方法传递相对 URL
-			baseURL:'http://t.lanchenglv.com/tp5demo/index.php/',
+			baseURL:'',
 			timeout: opts.time || 10*1000,
 			responseType: opts.dataType || 'json'
 		}).then(function(res){
-			
+			console.log(res);
 			if(res.status == 200 ){
-				
 				if(opts.success){
 					opts.success(res.data,res);
 				}
@@ -54,7 +53,7 @@ var Rxports = {
 				if (data.error) {
 					opts.error(error);
 				}else{
-					console.log('请求错误')
+					console.log('请求错误');
 				}
 				
 			}
@@ -65,7 +64,7 @@ var Rxports = {
 			if (opts.error) {
 				opts.error(error);
 			}else{
-				alert('好多人在访问呀，请重新试试[timeout]');
+				console.log('好多人在访问呀，请重新试试[timeout]');
 			}
 		});
 			
@@ -100,12 +99,12 @@ var Rxports = {
             if (That.isArrayLike(obj)) {
                 for (var n = obj.length; i < n; i++) {
                     if (fn(i, obj[i]) === false)
-                        break
+                        break;
                 }
             } else {
                 for (i in obj) {
                     if (obj.hasOwnProperty(i) && fn(i, obj[i]) === false) {
-                        break
+                        break;
                     }
                 }
             }
